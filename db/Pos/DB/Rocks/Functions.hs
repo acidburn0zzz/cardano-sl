@@ -98,7 +98,7 @@ openNodeDBs recreate fp = do
     ensureDirectoryExists = liftIO . createDirectoryIfMissing True
 
 -- | Safely close all databases from 'NodeDBs'.
-closeNodeDBs :: MonadIO m => NodeDBs -> m ()
+closeNodeDBs :: NodeDBs -> IO ()
 closeNodeDBs NodeDBs {..} =
     mapM_ closeRocksDB [_blockIndexDB, _gStateDB, _lrcDB, _miscDB]
 

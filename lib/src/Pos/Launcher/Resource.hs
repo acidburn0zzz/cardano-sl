@@ -172,7 +172,7 @@ releaseNodeResources ::
        NodeResources ext -> Production ()
 releaseNodeResources NodeResources {..} = do
     whenJust nrJLogHandle (liftIO . hClose)
-    closeNodeDBs nrDBs
+    liftIO $ closeNodeDBs nrDBs
     releaseNodeContext nrContext
 
 -- | Run computation which requires 'NodeResources' ensuring that

@@ -80,7 +80,7 @@ dbTagToLens GStateDB     = gStateDB
 dbTagToLens LrcDB        = lrcDB
 dbTagToLens MiscDB       = miscDB
 
-getNodeDBs :: MonadRealDB ctx m => m NodeDBs
+getNodeDBs :: (MonadReader ctx m, HasLens NodeDBs ctx NodeDBs) => m NodeDBs
 getNodeDBs = view (lensOf @NodeDBs)
 
 getDBByTag :: MonadRealDB ctx m => DBTag -> m DB
